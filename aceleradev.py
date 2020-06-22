@@ -24,7 +24,7 @@ def main():
         st.markdown('Há quantas mulheres com idade entre 26 e 35 anos no dataset?')
         st.markdown("<h4>Essa questão fez confusão na cabeça de muitos, o motivo seria o enunciado que da a entender que\
             a busca seria por ids unicos, quando na verdade a solução exige contagem repetida dos ids.Logo, a melhor escolha seria filtrar por duas condições, sendo elas.<br> Age == 26-35 e Gender == F.<br>Assim encontraremos o seguinte resultado:</h4>", unsafe_allow_html=True)
-        st.write(black_friday[(black_friday['Gender'] == 'F') & (black_friday['Age'] == '26-35')].shape[0])
+        st.write(sum( (black_friday['Gender'] == 'F') & (black_friday['Age'] == '26-35') ))
         qtd_mulheres = st.slider('Escolha o numero de observaçoes que deseja ver de mulheres com idade entre 26 e 35 anos', min_value=1, max_value=20)
         st.dataframe(black_friday[(black_friday['Gender'] == 'F') & (black_friday['Age'] == '26-35')].head(qtd_mulheres))
         st.subheader('Questão 3')
@@ -67,9 +67,9 @@ def main():
         st.subheader('Questão 8')
         st.markdown('Qual a nova média da variável (coluna) `Purchase` após sua normalização?')
         st.markdown("<h4>Dentre as diversas formas de normalização, aqui utilizamos a técnica minmax!</h4>", unsafe_allow_html=True)
-        normalizacao = ((black_friday['Purchase'] - black_friday['Purchase'].min()) / (
+        mean_normalizacao = ((black_friday['Purchase'].mean() - black_friday['Purchase'].min()) / (
                     black_friday['Purchase'].max() - black_friday['Purchase'].min()))
-        resposta = normalizacao.mean()
+        resposta = mean_normalizacao
         st.write(float(resposta))
         st.dataframe(normalizacao)
         st.subheader('Questão 9')
